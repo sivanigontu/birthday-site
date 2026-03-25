@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Munchkin 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e0, #ffe6f0);
+  overflow: hidden;
+}
+
+.page {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  width: 85%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff66a3;
+  color: white;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 15px pink;
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-10vh);}
+}
+
+#letterBox {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(255,192,203,0.95);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+@keyframes pop {
+  0% {transform: scale(0);}
+  100% {transform: scale(1.5); opacity:0;}
+}
+</style>
+</head>
+
+<body onclick="createHeart(event)">
+
+<audio autoplay loop>
+  <source src="song.mp3">
+</audio>
+
+<script>
+for (let i = 0; i < 15; i++) {
+  let h = document.createElement("div");
+  h.innerHTML = "💖";
+  h.className = "heart";
+  h.style.left = Math.random()*100+"vw";
+  h.style.animationDuration = (3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+}
+</script>
+
+<div class="page">
+  <div class="card">
+    <h2 style="font-family:Pacifico;">a love letter to you 💌</h2>
+    <button onclick="openLetter()">Click for Surprise 🎁</button>
+  </div>
+</div>
+
+<div id="letterBox">
+  <div class="card">
+    <h2 style="font-family:Pacifico;">My Munchkin 💖</h2>
+    <p id="loveText"></p>
+  </div>
+</div>
+
+<script>
+function openLetter(){
+  document.getElementById("letterBox").style.display="flex";
+  startTyping();
+}
+
+let letter = "Happy Birthday my munchkin 💖\n\nI’m writing this with my whole heart, because that’s where you live now.\n\nIt’s been 5 beautiful years of us… and yet, every moment with you still feels just as special as the beginning. From endless movie dates to our fun little gamezone days, every memory with you is something I hold so close to my heart.\n\nSometimes I sit and think about how lucky I am to have you, and it honestly feels unreal. The way you care for me, the way you understand me even when I don’t say anything, and the way you stay calm when I’m all over the place… it means everything to me.\n\nYou notice when I’m not okay just from my voice, you sit with me and study, you take me to my exams, and you travel all that distance every weekend just to spend time with me… who does that? Only my munchkin with the kindest and purest heart.\n\nYou don’t just love me, you take care of me in ways I didn’t even know I needed. You make my life feel lighter, calmer, and so much happier.\n\nWith you, I can talk for hours and still not get tired. I can be my complete self without fear. You’ve become my safe place, my peace, my comfort, and my home.\n\nI’m so proud of the person you are, and I’m so grateful that I get to be loved by you.\n\nI promise to always stand by you, support you, and love you in every phase of life. No matter what happens, I will choose you, again and again.\n\nThese 5 years are just the beginning… I want a lifetime more of movie dates, silly games, and growing together with you.\n\nYou are my today, my tomorrow, and everything in between.\n\nI love you more than words can ever explain 💞\n\nForever yours 💖";
+
+let i = 0;
+function startTyping(){
+  document.getElementById("loveText").innerHTML="";
+  i = 0;
+  type();
+}
+
+function type(){
+  if(i < letter.length){
+    document.getElementById("loveText").innerHTML += letter.charAt(i);
+    i++;
+    setTimeout(type,30);
+  } else {
+    showFinal();
+  }
+}
+
+function showFinal(){
+  let q = document.createElement("div");
+  q.innerHTML = `
+    <h3>Will you always be mine? 💖</h3>
+    <button onclick="yesLove()">YES 😭💞</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😏</button>
+  `;
+  document.getElementById("loveText").appendChild(q);
+}
+
+function moveNo(){
+  let btn = document.getElementById("noBtn");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random()*80 + "vw";
+  btn.style.top = Math.random()*80 + "vh";
+}
+
+function yesLove(){
+  document.getElementById("loveText").innerHTML = `
+    <h2>Happy Birthday My Love 🎂💖</h2>
+    <p>You are my forever, my always, my everything 🥺</p>
+    <p>I love you endlessly, my munchkin 💞</p>
+  `;
+  heartBlast();
+}
+
+function heartBlast(){
+  for(let i=0;i<60;i++){
+    let h=document.createElement("div");
+    h.innerHTML="💖";
+    h.style.position="fixed";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    h.style.fontSize="20px";
+    h.style.animation="pop 2s ease";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+function createHeart(e){
+  let h=document.createElement("div");
+  h.innerHTML="💖";
+  h.style.position="absolute";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  h.style.animation="pop 1s ease forwards";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1000);
+}
+</script>
+
+</body>
+</html>
